@@ -4,13 +4,13 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
-import {Navbar,Nav} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 // extreme grid
 import "@devexpress/dx-react-grid";
-import { Grid, Table,TableHeaderRow,PagingPanel} from '@devexpress/dx-react-grid-bootstrap4';
-import { PagingState, SortingState ,IntegratedPaging, IntegratedSorting} from '@devexpress/dx-react-grid' 
+import { Grid, Table,TableHeaderRow,pagingPannel, PagingPanel} from '@devexpress/dx-react-grid-bootstrap4';
+import { PagingState,IntegratedPaging} from '@devexpress/dx-react-grid' 
 //others
 import './App.css';
 import data from './data'
@@ -28,12 +28,11 @@ const GridView =()=>(
       { name: 'email', title: 'email' },
       { name: 'body', title: 'Message' },
     ]}>
-    <PagingState defaultPageSize={15}/>
-    <SortingState/>
-    <IntegratedPaging/>
-    <IntegratedSorting/>
+      <PagingState defaultPageSize={15}/>
+     
     <Table />
-    <TableHeaderRow showSortingControls/>
+    <TableHeaderRow />
+    <PagingPanel/>
   </Grid>
 )
 
@@ -49,8 +48,19 @@ function App() {
         <LinkContainer exact={true} to="/">
           <Nav.Link href="#home">Home</Nav.Link>
         </LinkContainer>
-          <Nav.Link href="/grid">Grid</Nav.Link>
+          <Nav.Link href="#link">Link</Nav.Link>
+          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown>
           </Nav>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <Button variant="outline-success">Search</Button>
+          </Form>
         </Navbar.Collapse>
       </Navbar>
         <Route exact path="/" component={HomeView}/>

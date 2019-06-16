@@ -34,6 +34,7 @@ const GridView =()=>(
     <IntegratedSorting/>
     <Table />
     <TableHeaderRow showSortingControls/>
+    <PagingPanel/>
   </Grid>
 )
 

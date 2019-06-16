@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
-import {Navbar,Nav} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 // extreme grid
@@ -30,10 +30,11 @@ const GridView =()=>(
     ]}>
     <PagingState defaultPageSize={15}/>
     <SortingState/>
-    <IntegratedPaging/>
     <IntegratedSorting/>
+    <IntegratedPaging/>
     <Table />
-    <TableHeaderRow showSortingControls/>
+    <TableHeaderRow />
+    <PagingPanel/>
   </Grid>
 )
 

@@ -4,13 +4,13 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
-import {Navbar,Nav} from 'react-bootstrap';
+import {Navbar,Nav,NavDropdown,Form,FormControl,Button} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 // extreme grid
 import "@devexpress/dx-react-grid";
 import { Grid, Table,TableHeaderRow,PagingPanel} from '@devexpress/dx-react-grid-bootstrap4';
-import { PagingState, SortingState ,IntegratedPaging, IntegratedSorting} from '@devexpress/dx-react-grid' 
+import { PagingState, IntegratedSorting ,IntegratedPaging} from '@devexpress/dx-react-grid' 
 //others
 import './App.css';
 import data from './data'
@@ -28,12 +28,11 @@ const GridView =()=>(
       { name: 'email', title: 'email' },
       { name: 'body', title: 'Message' },
     ]}>
-    <PagingState defaultPageSize={15}/>
-    <SortingState/>
-    <IntegratedPaging/>
-    <IntegratedSorting/>
+      <PagingState defaultPageSize={15}/>
+     <IntegratedPaging/>
     <Table />
-    <TableHeaderRow showSortingControls/>
+    <TableHeaderRow />
+    <PagingPanel/>
   </Grid>
 )
 
@@ -51,6 +50,7 @@ function App() {
         </LinkContainer>
           <Nav.Link href="/grid">Grid</Nav.Link>
           </Nav>
+          
         </Navbar.Collapse>
       </Navbar>
         <Route exact path="/" component={HomeView}/>
