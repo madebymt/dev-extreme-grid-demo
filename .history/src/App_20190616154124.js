@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
-import {Navbar,Nav, Button} from 'react-bootstrap';
+import {Navbar,Nav} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 // extreme grid
@@ -20,38 +20,17 @@ const HomeView =()=>(
   <h1>Hello!</h1>
 )
 
-const saveSorting = sorting =>{
-  sessionStorage.setItem('grid_sorting', JSON.stringify(sorting));
-}
-
-const loadSorting =()=>{
-  const sorting = sessionStorage.getItem('grid_sorting');
-  if(sorting){
-    return JSON.parse(sorting);
-  }
-}
 class GridView extends Component {
   constructor(){
     super();
     this.state={
-      sorting:loadSorting() || []
+      sorting:[
+        {columnName: 'name',direction:'asc'}
+      ]
     }
-    this.onSortingChange = this.onSortingChange.bind(this);
-  };
-
-  onSortingChange(sorting){
-    this.setState({
-      sorting
-    })
-    saveSorting(sorting);
   }
-
   render(){
     return(
-      <div>
-        <Button bsStyle="primary"
-        onClick={()=>this.onSortingChange([])}> Reset Sorting
-        </Button>
       <Grid
         rows={data}
         columns={[
@@ -68,7 +47,6 @@ class GridView extends Component {
       <TableHeaderRow showSortingControls/>
       <PagingPanel/>
     </Grid>
-    </div>
     )
   }
 }

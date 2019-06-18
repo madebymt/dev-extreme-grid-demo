@@ -1,10 +1,10 @@
 //react
-import React ,{Component}from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
-import {Navbar,Nav, Button} from 'react-bootstrap';
+import {Navbar,Nav} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import '@devexpress/dx-react-grid-bootstrap4/dist/dx-react-grid-bootstrap4.css';
 // extreme grid
@@ -14,64 +14,28 @@ import { PagingState, SortingState ,IntegratedPaging, IntegratedSorting} from '@
 //others
 import './App.css';
 import data from './data'
-//import { threadId } from 'worker_threads';
 
 const HomeView =()=>(
   <h1>Hello!</h1>
 )
 
-const saveSorting = sorting =>{
-  sessionStorage.setItem('grid_sorting', JSON.stringify(sorting));
-}
-
-const loadSorting =()=>{
-  const sorting = sessionStorage.getItem('grid_sorting');
-  if(sorting){
-    return JSON.parse(sorting);
-  }
-}
-class GridView extends Component {
-  constructor(){
-    super();
-    this.state={
-      sorting:loadSorting() || []
-    }
-    this.onSortingChange = this.onSortingChange.bind(this);
-  };
-
-  onSortingChange(sorting){
-    this.setState({
-      sorting
-    })
-    saveSorting(sorting);
-  }
-
-  render(){
-    return(
-      <div>
-        <Button bsStyle="primary"
-        onClick={()=>this.onSortingChange([])}> Reset Sorting
-        </Button>
-      <Grid
-        rows={data}
-        columns={[
-          { name: 'id', title: 'ID' },
-          { name: 'name', title: 'name' },
-          { name: 'email', title: 'email' },
-          { name: 'body', title: 'Message' },
-        ]}>
-      <PagingState defaultPageSize={15} defaultCurrentPage={4} />
-      <SortingState sorting={this.state.sorting} onSortingChange={this.onSortingChange}/>
-      <IntegratedPaging/>
-      <IntegratedSorting/>
-      <Table />
-      <TableHeaderRow showSortingControls/>
-      <PagingPanel/>
-    </Grid>
-    </div>
-    )
-  }
-}
+const GridView =()=>(
+  <Grid
+    rows={data}
+    columns={[
+      { name: 'id', title: 'ID' },
+      { name: 'name', title: 'name' },
+      { name: 'email', title: 'email' },
+      { name: 'body', title: 'Message' },
+    ]}>
+    <PagingState  />
+    <SortingState defaultSorting={[{columnName:'name',direction:'asc'}]}/>
+    <IntegratedPaging/>
+    <IntegratedSorting/>
+    <Table />
+    <TableHeaderRow showSortingControls/>
+  </Grid>
+)
 
 function App() {
   return (
